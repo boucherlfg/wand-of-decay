@@ -1,2 +1,2 @@
 
-public enum DecayableType { Tree, Bush, Soil }
+public enum DecayableType { Tree, Bush, Soil, Plant }
