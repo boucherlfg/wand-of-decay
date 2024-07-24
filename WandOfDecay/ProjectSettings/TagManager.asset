@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Soil
+    uniqueID: 2809815283
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
