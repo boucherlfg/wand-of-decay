@@ -189,7 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fcf57fcb1ca8142bb411e8e9ba49f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   maxLife: 10
+  regenRate: 0.05
   sprites:
   - {fileID: 1007637179, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   - {fileID: -1874521473, guid: 988b642f886343c4695eba48963c44c5, type: 3}

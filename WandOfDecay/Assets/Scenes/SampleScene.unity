@@ -860,6 +860,7 @@ RectTransform:
   - {fileID: 1782283316}
   - {fileID: 1988804564}
   - {fileID: 42345109}
+  - {fileID: 1904749256}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2009,23 +2010,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size:
     serializedVersion: 2
-    x: -25
-    y: -25
-    width: 50
-    height: 50
+    x: -35
+    y: -35
+    width: 70
+    height: 70
   objectsWithCounts:
   - prefabs:
     - {fileID: 8441165777631188433, guid: 0e5b8666c6435e44c97ec4f8493112bf, type: 3}
-    count: 200
+    count: 400
   - prefabs:
     - {fileID: 8441165777631188433, guid: 95d9d40d0b06dc0469d48062883f9f9b, type: 3}
-    count: 800
+    count: 1000
   - prefabs:
     - {fileID: 8441165777631188433, guid: e217e267a6411e3459fd58ee3d0dd7e0, type: 3}
     - {fileID: 8441165777631188433, guid: bed2d123c2488f443b9a535c98cc29f4, type: 3}
     - {fileID: 8441165777631188433, guid: 249e1d78ede15f846b2ebe1cafbfa0a3, type: 3}
     - {fileID: 8441165777631188433, guid: 566b63bd193ef29408ae6acea1ba2ef4, type: 3}
-    count: 1200
+    count: 2000
+  - prefabs:
+    - {fileID: 4701298771338271146, guid: 8b67dd65ad6c89b4fa5c9214d121aea0, type: 3}
+    count: 5
+  - prefabs:
+    - {fileID: 4701298771338271146, guid: 0ed08e9ef827bf040a6f0bd8526c09a7, type: 3}
+    count: 20
   soil: {fileID: 6920439805982281776, guid: 65d63f4831180e6499cf870d9b4ec7cf, type: 3}
 --- !u!1 &1612063672
 GameObject:
@@ -2503,12 +2510,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904749253}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -400.00003, y: -188.99164, z: 0}
+  m_LocalScale: {x: 0.7045355, y: 0.7045355, z: 0.7045355}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 630455447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950744863
 GameObject:
@@ -2774,6 +2781,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5384133518230853364, guid: 8f33a10bd2b13d94f8527bb1f556803b, type: 3}
+      propertyPath: floatSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2791,4 +2802,3 @@ SceneRoots:
   - {fileID: 7637137821843869317}
   - {fileID: 1492409070}
   - {fileID: 630455447}
-  - {fileID: 1904749256}

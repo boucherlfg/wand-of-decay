@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corruptedSprite: {fileID: 831842062, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   corruptStrength: 0
-  corruptTime: 0.5
+  corruptTime: 0.25

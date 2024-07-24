@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   maxLife: 0.5
+  regenRate: 0
   sprites:
   - {fileID: 743595775, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   toTurnIntoWhenDead: {fileID: 8441165777631188433, guid: 11ea8c03e30601d4aabc3dc198d3f9e0, type: 3}

@@ -7,9 +7,12 @@ public class Decayable : MonoBehaviour
     [SerializeField]
     private float maxLife = 10;
     [SerializeField]
+    private float regenRate = 0.15f;
+    [SerializeField]
     private Sprite[] sprites;
     [SerializeField]
     private GameObject toTurnIntoWhenDead;
+
 
     private SpriteRenderer rend;
     private void Start()
@@ -19,6 +22,7 @@ public class Decayable : MonoBehaviour
     }
     private void Update()
     {
+        currentLife += Time.deltaTime * regenRate;
         var index = Mathf.Clamp((int)((currentLife / maxLife) * sprites.Length), 0, sprites.Length - 1);
         rend.sprite = sprites[index];
         if (currentLife <= 0)

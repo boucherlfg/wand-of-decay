@@ -8,6 +8,9 @@ public class Dead : MonoBehaviour
     private bool destroyAfterCorrupt;
     [SerializeField]
     private int corruptStrength = 3;
+    [SerializeField]
+    private bool corruptOnUpdate = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,11 @@ public class Dead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!corruptOnUpdate) return;
+
+        int x = (int)transform.position.x,
+            y = (int)transform.position.y;
+        var soil = Soil.soils[x, y];
+        soil.Corrupt(corruptStrength);
     }
 }
