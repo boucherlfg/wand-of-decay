@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float aoeDamage = 0.5f;
     private float aoeCounter = 0;
+    [SerializeField]
+    private GameObject aoeIndicator;
 
     private Vector2 mouseDelta;
     private Vector2 mousePosition;
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
 
     void HandleRightClick()
     {
+        aoeIndicator.SetActive(aoeCounter > 0);
         aoeCounter -= Time.deltaTime;
         if (aoeCounter > 0) return;
         if (!Input.GetMouseButtonUp(1)) return;

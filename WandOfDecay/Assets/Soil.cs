@@ -26,7 +26,7 @@ public class Soil : MonoBehaviour
     {
         if (strength <= 0) return;
 
-        ServiceManager.Instance.Get<Stats>()[DecayableType.Soil]++;
+        if(corruptStrength <= 0) ServiceManager.Instance.Get<Stats>()[DecayableType.Soil]++;
         corruptStrength = strength;
         GetComponent<SpriteRenderer>().sprite = corruptedSprite;
         StartCoroutine(CorruptNeighbours());
@@ -44,7 +44,7 @@ public class Soil : MonoBehaviour
                 if ((i + j) * (i + j) != 1) continue;
                 var soil = soils[x + i, y + j];
                 if(soil == null) continue;
-                if (soil.corruptStrength > 0) continue;
+                if (soil.corruptStrength > corruptStrength - 1) continue;
 
                 soil.Corrupt(corruptStrength - 1);
             }
