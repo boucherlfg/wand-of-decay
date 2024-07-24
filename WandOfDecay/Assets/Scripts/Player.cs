@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     private float aoeCooldown = 3f;
     [SerializeField]
     private float aoeDamage = 0.5f;
+    private float aoeCounter = 0;
 
     private Vector2 mouseDelta;
     private Vector2 mousePosition;
@@ -67,8 +68,6 @@ public class Player : MonoBehaviour
 
     void HandleLeftClick()
     {
-
-
         if (!Input.GetMouseButton(0))
         {
             rayImpact.gameObject.SetActive(false);
@@ -98,28 +97,29 @@ public class Player : MonoBehaviour
 
     void HandleRightClick()
     {
-        if (Input.GetMouseButtonUp(1))
+        aoeCounter -= Time.deltaTime;
+        if (aoeCounter > 0) return;
+        if (!Input.GetMouseButtonUp(1)) return;
+        aoeCounter = aoeCooldown;
+
+        var hits = Physics2D.OverlapCircleAll(transform.position, aoeRange)
+                           .Where(x => x.gameObject != gameObject && x.GetComponent<Decayable>());
+
+        var aoe = Instantiate(aoeCirclePrefab, transform.position, Quaternion.identity).GetComponent<AoeCirlcle>();
+        aoe.radius = aoeRange;
+
+        foreach (var hit in hits)
         {
+            StartCoroutine(ReceiveDamage(hit.GetComponent<Decayable>()));
+            Instantiate(aoeHitEffect, hit.transform.position, Quaternion.identity);
+        }
 
-            var hits = Physics2D.OverlapCircleAll(transform.position, aoeRange)
-                               .Where(x => x.gameObject != gameObject && x.GetComponent<Decayable>());
-
-            var aoe = Instantiate(aoeCirclePrefab, transform.position, Quaternion.identity).GetComponent<AoeCirlcle>();
-            aoe.radius = aoeRange;
-
-            foreach (var hit in hits)
+        IEnumerator ReceiveDamage(Decayable decayable)
+        {
+            for (float i = 0; i < 1; i += Time.deltaTime)
             {
-                StartCoroutine(ReceiveDamage(hit.GetComponent<Decayable>()));
-                Instantiate(aoeHitEffect, hit.transform.position, Quaternion.identity);
-            }
-
-            IEnumerator ReceiveDamage(Decayable decayable)
-            {
-                for (float i = 0; i < 1; i += Time.deltaTime)
-                {
-                    decayable.ReceiveDamage(aoeDamage);
-                    yield return null;
-                }
+                decayable.ReceiveDamage(aoeDamage);
+                yield return null;
             }
         }
     }
