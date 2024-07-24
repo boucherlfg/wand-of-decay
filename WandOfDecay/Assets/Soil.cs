@@ -25,6 +25,8 @@ public class Soil : MonoBehaviour
     public void Corrupt(int strength) 
     {
         if (strength <= 0) return;
+
+        ServiceManager.Instance.Get<Stats>()[DecayableType.Soil]++;
         corruptStrength = strength;
         GetComponent<SpriteRenderer>().sprite = corruptedSprite;
         StartCoroutine(CorruptNeighbours());
@@ -33,8 +35,8 @@ public class Soil : MonoBehaviour
     IEnumerator CorruptNeighbours()
     {
         yield return new WaitForSeconds(corruptTime);
-        int x = (int)transform.position.x;
-        int y = (int)transform.position.y;
+        int x = Mathf.RoundToInt(transform.position.x);
+        int y = Mathf.RoundToInt(transform.position.y);
         for (int i = -1; i <= 1; i++)
         {
             for (int j = -1; j <= 1; j++)

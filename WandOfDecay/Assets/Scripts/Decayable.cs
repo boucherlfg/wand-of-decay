@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Decayable : MonoBehaviour 
 {
+    public DecayableType type;
     private float currentLife;
     [SerializeField]
     private float maxLife = 10;
@@ -19,11 +20,11 @@ public class Decayable : MonoBehaviour
     private void Update()
     {
         var index = Mathf.Clamp((int)((currentLife / maxLife) * sprites.Length), 0, sprites.Length - 1);
-        Debug.Log(currentLife);
         rend.sprite = sprites[index];
         if (currentLife <= 0)
         {
             if(toTurnIntoWhenDead) Instantiate(toTurnIntoWhenDead, transform.position, Quaternion.identity);
+            ServiceManager.Instance.Get<Stats>()[type]++;
             Destroy(gameObject);
         }
     }
