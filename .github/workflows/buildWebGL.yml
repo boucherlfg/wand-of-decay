@@ -5,7 +5,7 @@
 
 name: Build Project
 env:
-  project_path: GetOutaMyGraveyard
+  project_path: WandOfDecay
 on: 
     push:
       branches:
