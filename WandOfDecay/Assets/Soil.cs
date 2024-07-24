@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Soil : MonoBehaviour
 {
-    protected static DictGrid<Soil> soils = new();
+    public static DictGrid<Soil> soils = new();
 
     [SerializeField]
     private Sprite corruptedSprite;

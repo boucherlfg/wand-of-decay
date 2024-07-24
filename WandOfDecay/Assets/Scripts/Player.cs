@@ -76,9 +76,10 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var endPos = (Vector2)rayStart.position + mouseDelta * (mousePosition - (Vector2)rayStart.position).magnitude;
+        var distance = (mousePosition - (Vector2)rayStart.position).magnitude;
+        var endPos = (Vector2)rayStart.position + mouseDelta * distance;
 
-        var hit = Physics2D.RaycastAll(rayStart.position, mouseDelta, 10)
+        var hit = Physics2D.RaycastAll(rayStart.position, mouseDelta, distance)
                            .Where(x => x.collider.gameObject != gameObject && x.collider.GetComponent<Decayable>())
                            .OrderBy(x => Vector2.Distance(x.transform.position, rayStart.position))
                            .FirstOrDefault();

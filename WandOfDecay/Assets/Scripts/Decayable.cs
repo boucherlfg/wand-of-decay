@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Decayable : MonoBehaviour
+public class Decayable : MonoBehaviour 
 {
     private float currentLife;
     [SerializeField]

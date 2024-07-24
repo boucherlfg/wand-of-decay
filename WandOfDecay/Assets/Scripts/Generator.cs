@@ -2,21 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-[UnityEditor.CustomEditor(typeof(Generator))]
-public class GeneratorEditor : UnityEditor.Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        if (GUILayout.Button("Generate"))
-        {
-            ((Generator)target).Generate();
-        }
-    }
-}
-#endif
-
 public class Generator : MonoBehaviour
 {
     [System.Serializable]
@@ -27,6 +12,8 @@ public class Generator : MonoBehaviour
     }
     public Rect size;
     public ObjectWithCount[] objectsWithCounts;
+
+    public GameObject soil;
 
     private List<GameObject> objects;
     private Player player;
@@ -39,6 +26,13 @@ public class Generator : MonoBehaviour
     public void Generate()
     {
         objects=new List<GameObject>();
+        for (int i = (int)size.x - 1; i < size.x + size.width + 1; i++)
+        {
+            for (int j = (int)size.y - 1; j < size.y + size.height + 1; j++)
+            {
+                objects.Add(Instantiate(soil, new Vector2(i, j), Quaternion.identity, transform));
+            }
+        }
         // var objs = new List<Transform>();
         foreach (var objCount in objectsWithCounts)
         {
@@ -55,7 +49,7 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        objects.ForEach(x => x.SetActive(Vector2.Distance(player.transform.position, x.transform.position) < 20));
+        // objects.ForEach(x => x.SetActive(Vector2.Distance(player.transform.position, x.transform.position) < 20));
     }
 
     private void OnDrawGizmosSelected()
