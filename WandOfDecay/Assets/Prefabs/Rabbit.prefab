@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  maxLife: 5
+  maxLife: 3
   regenRate: 0.1
   sprites:
   - {fileID: 1285783210, guid: 988b642f886343c4695eba48963c44c5, type: 3}

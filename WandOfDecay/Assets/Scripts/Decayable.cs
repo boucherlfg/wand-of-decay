@@ -23,6 +23,7 @@ public class Decayable : MonoBehaviour
     private void Update()
     {
         currentLife += Time.deltaTime * regenRate;
+        if (currentLife > maxLife) currentLife = maxLife;
         var index = Mathf.Clamp((int)((currentLife / maxLife) * sprites.Length), 0, sprites.Length - 1);
         rend.sprite = sprites[index];
         if (currentLife <= 0)

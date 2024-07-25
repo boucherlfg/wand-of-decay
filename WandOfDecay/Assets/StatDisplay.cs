@@ -12,6 +12,8 @@ public class StatDisplay : MonoBehaviour
     private TMPro.TMP_Text bush;
     [SerializeField]
     private TMPro.TMP_Text plant;
+    [SerializeField]
+    private TMPro.TMP_Text animal;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class StatDisplay : MonoBehaviour
         tree.text = "" + stat[DecayableType.Tree];
         bush.text = "" + stat[DecayableType.Bush];
         plant.text = "" + stat[DecayableType.Plant];
+        animal.text = "" + stat[DecayableType.Fauna];
     }
 
     // Update is called once per frame

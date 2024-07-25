@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
     private Transform arm;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject startMenu;
+    [SerializeField]
+    private GameObject endMenu;
 
     [Header("Ray")]
     [SerializeField]
@@ -48,10 +54,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startMenu.activeSelf || endMenu.activeSelf) return;
+
         HandleMove();
         HandleMouseDirection();
         HandleLeftClick();
         HandleRightClick();
+        HandlePause();
+    }
+
+    void HandlePause()
+    {
+        if (!Input.GetKeyUp(KeyCode.Escape)) return;
+
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
 
     void HandleMove()
