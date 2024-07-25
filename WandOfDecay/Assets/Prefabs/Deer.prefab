@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8752022e058781b4fa8a0e2452c7a724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 1
 --- !u!114 &5541812353802992276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  maxLife: 15
+  maxLife: 18
   regenRate: 0.15
   sprites:
   - {fileID: -1934581119, guid: 988b642f886343c4695eba48963c44c5, type: 3}
