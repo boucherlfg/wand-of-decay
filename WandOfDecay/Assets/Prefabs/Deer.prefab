@@ -65,7 +65,6 @@ MonoBehaviour:
   maxLife: 15
   regenRate: 0.15
   sprites:
-  - {fileID: 934440993, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   - {fileID: -1934581119, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   - {fileID: -716974887, guid: 988b642f886343c4695eba48963c44c5, type: 3}
   - {fileID: -777453013, guid: 988b642f886343c4695eba48963c44c5, type: 3}
