@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Stats
 {
+
     private Dictionary<DecayableType, int> points = new();
 
     public int this[DecayableType type]

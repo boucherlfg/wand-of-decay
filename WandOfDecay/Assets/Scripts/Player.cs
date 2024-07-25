@@ -86,13 +86,16 @@ public class Player : MonoBehaviour
 
     void HandleLeftClick()
     {
+        var rayActive = false;
+        var impactActive = false;
         if (!Input.GetMouseButton(0))
         {
-            rayImpact.gameObject.SetActive(false);
-            rayLine.gameObject.SetActive(false);
+            rayImpact.gameObject.SetActive(impactActive);
+            rayLine.gameObject.SetActive(rayActive);
             return;
         }
 
+        rayActive = true;
         var distance = (mousePosition - (Vector2)rayStart.position).magnitude;
         var endPos = (Vector2)rayStart.position + mouseDelta * distance;
 
@@ -105,12 +108,13 @@ public class Player : MonoBehaviour
         {
             endPos = hit.point;
             hit.collider.GetComponent<Decayable>().ReceiveDamage(rayDamage);
+            impactActive = true;
         }
 
-        rayLine.gameObject.SetActive(true);
-        rayLine.SetPositions(new Vector3[] { Vector3.zero, Vector3.right * (endPos - (Vector2)rayStart.position).magnitude });
-        rayImpact.gameObject.SetActive(true);
+        rayImpact.gameObject.SetActive(impactActive);
         rayImpact.transform.position = endPos;
+        rayLine.gameObject.SetActive(rayActive);
+        rayLine.SetPositions(new Vector3[] { Vector3.zero, Vector3.right * (endPos - (Vector2)rayStart.position).magnitude });
     }
 
     void HandleRightClick()
