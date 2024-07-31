@@ -16,10 +16,12 @@ public class Leaderboard : MonoBehaviour
         yield return Ext.GetEntries(result);
         var entries = result.value;
 
+        foreach (Transform child in content) Destroy(child.gameObject);
+
         foreach (var entry in entries)
         {
             var comp = Instantiate(entryPrefab, content).GetComponent<EntryScript>();
-            comp.Position = entry.position;
+            comp.Position = entry.position + 1;
             comp.Name = entry.name;
             comp.Score = entry.score;
         }
