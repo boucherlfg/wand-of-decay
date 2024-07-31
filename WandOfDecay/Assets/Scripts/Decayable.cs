@@ -28,7 +28,7 @@ public class Decayable : MonoBehaviour
         rend.sprite = sprites[index];
         if (currentLife <= 0)
         {
-            if(toTurnIntoWhenDead) Instantiate(toTurnIntoWhenDead, transform.position, Quaternion.identity);
+            if(toTurnIntoWhenDead) Instantiate(toTurnIntoWhenDead, transform.position, Quaternion.identity, transform.parent);
             ServiceManager.Instance.Get<Stats>()[type]++;
             Destroy(gameObject);
         }
