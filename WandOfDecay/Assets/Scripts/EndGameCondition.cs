@@ -14,6 +14,7 @@ public class EndGameCondition : MonoBehaviour
     private void Start()
     {
         stats = ServiceManager.Instance.Get<Stats>();
+        stats.Clear();
     }
     // Update is called once per frame
     void Update()

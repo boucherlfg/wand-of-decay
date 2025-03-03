@@ -19,5 +19,5 @@ public class Stats
             Debug.Log($"{type} : {points[type]}");
         }
     }
-
+    public void Clear() => points.Clear();
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEngine.Networking;
 public static class Ext
 {
-    const string address = "http://deraju.ddns.net:3000";
+    private const string HighScore = nameof(HighScore);
 
     [System.Serializable]
     public class Entry
@@ -16,52 +15,36 @@ public static class Ext
         public int position;
     }
 
-    public class Ref<T> { public T value; }
-
-    
-    public static IEnumerator PostEntry(string name, int score, Ref<List<Entry>> result)
+    public static void PostEntry(string name, int score)
     {
-        var entry = new Entry { name = name, score = score, position = -1 };
-        var json = JsonConvert.SerializeObject(entry);
-        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        var result = GetEntries();
+        Entry positionToReplace = result.FirstOrDefault(entry => entry.score < score);
+        if (positionToReplace == null) return; // if there is no entry, it means that all scores are bigger than given score
 
-        var uwr = new UnityWebRequest(address, "POST");
-        uwr.uploadHandler = new UploadHandlerRaw(jsonToSend);
-        uwr.downloadHandler = new DownloadHandlerBuffer();
-        uwr.SetRequestHeader("Content-Type", "text/plain");
-        yield return uwr.SendWebRequest();
-
-        if (uwr.result == UnityWebRequest.Result.ConnectionError)
+        foreach (var entry in result.FindAll(x => x.position >= positionToReplace.position))
         {
-            Debug.Log("Error While Sending: " + uwr.error);
+	        entry.position++;
         }
-        else
-        {
-            Debug.Log("Received: " + uwr.downloadHandler.text);
-            string responseBody = uwr.downloadHandler.text;
-            var intermediate = JsonConvert.DeserializeObject<List<string>>(responseBody);
-            var body = intermediate.Select(i => JsonConvert.DeserializeObject<Entry>(i));
-            result.value = body?.OrderBy(x => x.position)?.ToList();
-        }
+        result.Insert(positionToReplace.position - 2, new Entry { name = name, score = score, position = positionToReplace.position - 1 });
+        
+        var json = JsonConvert.SerializeObject(result);
+        PlayerPrefs.SetString(HighScore, json);
     }
 
-    public static IEnumerator GetEntries(Ref<List<Entry>> result)
+    private static List<Entry> CreateNewListOfEntries()
     {
-        UnityWebRequest uwr = UnityWebRequest.Get(address);
-        yield return uwr.SendWebRequest();
+	    var entries = new List<Entry>();
+	    for (int i = 0; i < 10; i++)
+	    {
+		    entries.Add(new Entry { name = "AAA", score = 0, position = i+1 });
+	    }
 
-        if (uwr.result == UnityWebRequest.Result.ConnectionError)
-        {
-            Debug.Log("Error While Sending: " + uwr.error);
-        }
-        else
-        {
-            string responseBody = uwr.downloadHandler.text;
-            var intermediate = JsonConvert.DeserializeObject<List<string>>(responseBody);
-            var body = intermediate.Select(i => JsonConvert.DeserializeObject<Entry>(i));
-            result.value = body?.OrderBy(x => x.position)?.ToList();
-            Debug.Log("Received: " + uwr.downloadHandler.text);
-        }
+	    return entries;
+    }
+    public static List<Entry> GetEntries()
+    {
+	    var json = PlayerPrefs.GetString(HighScore, JsonConvert.SerializeObject(CreateNewListOfEntries()));
+	    return JsonConvert.DeserializeObject<List<Entry>>(json);
     }
     
     public static T RandomChoice<T>(this IEnumerable<T> source)

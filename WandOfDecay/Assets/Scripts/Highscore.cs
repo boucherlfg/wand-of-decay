@@ -17,16 +17,10 @@ public class Highscore : MonoBehaviour
     }
     private void HandleGameEnded()
     {
-        StartCoroutine(GameEndedCoroutine());
-    }
-    IEnumerator GameEndedCoroutine()
-    {
         var score = ServiceManager.Instance.Get<Stats>()[DecayableType.Soil];
 
-        var result = new Ext.Ref<List<Ext.Entry>>();
-        yield return Ext.GetEntries(result);
+        var entries = Ext.GetEntries();
 
-        var entries = result.value;
         if (entries.Any(x => x.score < score))
         {
             newHighscore.SetActive(true);

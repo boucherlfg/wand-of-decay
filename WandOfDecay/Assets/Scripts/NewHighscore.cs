@@ -21,12 +21,7 @@ public class NewHighscore : MonoBehaviour
 
     public void PostNewHighscore()
     {
-        StartCoroutine(NewHighscoreCoroutine());
-    }
-    IEnumerator NewHighscoreCoroutine()
-    {
-        var result = new Ext.Ref<List<Ext.Entry>>();
-        yield return Ext.PostEntry(input.text, stats[DecayableType.Soil], result);
+        Ext.PostEntry(input.text, stats[DecayableType.Soil]);
 
         leaderboard.SetActive(true);
         gameObject.SetActive(false);
