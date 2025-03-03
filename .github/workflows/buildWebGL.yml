@@ -22,7 +22,7 @@ jobs:
     steps:
       # Checkout
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
             lfs: true
       # Cache
@@ -41,7 +41,7 @@ jobs:
           projectPath: ${{ env.project_path }}
           targetPlatform: WebGL
        # Output
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
            name: Build
            projectPath: ${{ env.project_path }}/build
